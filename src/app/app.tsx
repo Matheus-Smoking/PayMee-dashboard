@@ -1,16 +1,16 @@
-import styled from '@emotion/styled';
-
-import NxWelcome from './nx-welcome';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
+import { RouterProvider } from 'react-router-dom';
+import { theme } from './themes';
+import { router } from './config/rounters';
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="pay-mee" />
-    </StyledApp>
+    <ThemeProvider theme={theme}>
+      <Box bgcolor="#eaecef" p={0}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </Box>
+    </ThemeProvider>
   );
 }
 
