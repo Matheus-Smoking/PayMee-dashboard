@@ -13,21 +13,31 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { fetchDash, selectorDashboard } from 'src/features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import {
+  fetchOperation,
+  selectorOperations,
+} from 'src/features/operation/operation-slice';
+import { formatDate, getDate } from 'src/app/utils/formate-date';
 
-const rows = [0, 1, 2, 3];
+const { yestarday, sevenDays, thirtyDays } = getDate();
+
+const dateOptions = [
+  { label: 'Dia anterior', value: formatDate(yestarday) },
+  { label: '7 dias', value: formatDate(sevenDays) },
+  { label: '30 Dias', value: formatDate(thirtyDays) },
+];
 
 export default function Operations() {
-  const [isDashboard, setDashboard] = React.useState([]);
+  const [optionDate, setOptionDate] = React.useState(dateOptions[0].value);
+  const [sort, setSort] = React.useState('');
   const dispatch = useDispatch();
-  const dashboard = useSelector(selectorDashboard);
+  const operations = useSelector(selectorOperations);
   React.useEffect(() => {
-    dispatch(fetchDash());
-    setDashboard(dashboard);
-    console.log('dashboard:', isDashboard);
-  }, []);
+    dispatch(fetchOperation({ date: optionDate, sort: sort }));
+  }, [dispatch, optionDate, sort]);
 
   return (
     <Box border="1px solid #e2e2e2" maxWidth="100%" bgcolor="white">
@@ -46,35 +56,71 @@ export default function Operations() {
         <Select
           labelId="selected-days"
           id="selected-days"
-          value={10}
-          onChange={() => undefined}
+          value={optionDate}
+          onChange={(event) => setOptionDate(event.target.value)}
           label="Dias"
           variant="standard"
         >
-          <MenuItem value={10}>Dia anterior</MenuItem>
-          <MenuItem value={20}>7 dias</MenuItem>
-          <MenuItem value={30}>30 dias</MenuItem>
+          {dateOptions.map(({ label, value }) => {
+            return (
+              <MenuItem key={value} value={value}>
+                {label}
+              </MenuItem>
+            );
+          })}
         </Select>
       </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
           <TableHead>
             <TableRow sx={{ background: '#eaecef' }}>
-              <TableCell sx={{ fontSize: '13px' }}>Operação</TableCell>
-              <TableCell sx={{ fontSize: '13px' }}>TID</TableCell>
-              <TableCell sx={{ fontSize: '13px' }}>Data</TableCell>
-              <TableCell sx={{ fontSize: '13px' }}>Valor Bruto</TableCell>
-              <TableCell sx={{ fontSize: '13px' }}>Taxa de Serviço</TableCell>
-              <TableCell sx={{ fontSize: '13px' }}>Valor Liquido</TableCell>
+              <TableCell
+                sx={{ fontSize: '13px' }}
+                onClick={() => setSort('refund')}
+              >
+                Operação
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '12px' }}
+                onClick={() => setSort('TID')}
+              >
+                TID
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '12px' }}
+                onClick={() => setSort('date')}
+              >
+                Data
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '12px' }}
+                onClick={() => setSort('value')}
+              >
+                Valor Bruto
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '12px' }}
+                onClick={() => setSort('rate')}
+              >
+                Taxa de Serviço
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: '12px' }}
+                onClick={() => setSort('liquid')}
+              >
+                Valor Liquido
+              </TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {operations?.map(({ TID, date, rate, refund, value, liquid }) => (
               <TableRow
-                key={row}
+                key={TID}
                 sx={{
-                  borderLeft: '3px solid #1eba5c',
+                  borderLeft: refund
+                    ? '3px solid #db9e00'
+                    : '3px solid #1eba5c',
                   borderBottom: '2px dashed #eaecef',
                 }}
               >
@@ -84,32 +130,32 @@ export default function Operations() {
                   sx={{ borderRight: '1px solid #e2e2e2' }}
                 >
                   <Typography
-                    bgcolor="#e9f9ef"
+                    bgcolor={refund ? '#fff4cc' : '#e9f9ef'}
                     borderRadius={2}
                     px={8}
                     py={1}
-                    color="info.main"
+                    color={refund ? 'warning.main' : 'info.main'}
                     fontSize={14}
                     textAlign="center"
                   >
-                    Venda
+                    {refund ? 'Reembolso' : 'Venda'}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ borderRight: '1px solid #e2e2e2' }}>
                   <Typography
                     variant="body1"
                     color="text.secondary"
-                    fontSize={14}
+                    fontSize={12}
                   >
                     TID
                   </Typography>
                   <Typography
                     variant="body1"
                     color="text.dark"
-                    fontSize={14}
+                    fontSize={12}
                     textAlign="left"
                   >
-                    0072469813
+                    {TID}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ borderRight: '1px solid #e2e2e2' }}>
@@ -121,7 +167,7 @@ export default function Operations() {
                     15:20:20
                   </Typography>
                   <Typography variant="body1" fontSize={14}>
-                    19/12/22
+                    {date}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ borderRight: '1px solid #e2e2e2' }}>
@@ -132,15 +178,15 @@ export default function Operations() {
                   >
                     Valor Bruto
                   </Typography>
-                  <Typography variant="body1" fontSize={13}>
+                  <Typography variant="body1" fontSize={12}>
                     <Typography
                       color="text.secondary"
                       display="inline-block"
-                      fontSize={12}
+                      fontSize={10}
                     >
                       R$
                     </Typography>{' '}
-                    8.25,00
+                    {value}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ borderRight: '1px solid #e2e2e2' }}>
@@ -151,15 +197,15 @@ export default function Operations() {
                   >
                     Taxa de Serviço
                   </Typography>
-                  <Typography variant="body1" fontSize={14}>
+                  <Typography variant="body1" fontSize={12}>
                     <Typography
                       color="text.secondary"
                       display="inline-block"
-                      fontSize={12}
+                      fontSize={10}
                     >
                       R$
                     </Typography>{' '}
-                    125,00
+                    {rate}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ borderRight: '1px solid #e2e2e2' }}>
@@ -170,82 +216,29 @@ export default function Operations() {
                   >
                     Valor Liquido
                   </Typography>
-                  <Typography variant="body1" fontSize={14}>
+                  <Typography variant="body1" fontSize={12}>
                     <Typography
                       color="text.secondary"
                       display="inline-block"
-                      fontSize={12}
+                      fontSize={10}
                     >
                       R$
                     </Typography>{' '}
-                    1.670,00
+                    {liquid}
                   </Typography>
                 </TableCell>
-                <TableCell>te</TableCell>
+                <TableCell>
+                  {refund ? (
+                    <ArrowDownwardIcon fontSize="small" color="warning" />
+                  ) : (
+                    <ArrowUpwardIcon fontSize="small" color="info" />
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
     </Box>
-
-    // <Box
-    //   display="flex"
-    //   justifyContent="space-between"
-    //   borderBottom="1px dashed #ccc"
-    // >
-    //   <Box component="div" px={2} my={1} borderRight="1px solid #ccc">
-    //     <Typography
-    //       bgcolor="#ccc"
-    //       borderRadius={2}
-    //       px={8}
-    //       py={1}
-    //       color="primary"
-    //       fontSize={15}
-    //     >
-    //       Venda
-    //     </Typography>
-    //   </Box>
-    //   <Box component="div" px={2} my={1} borderRight="1px solid #ccc">
-    //     <Typography variant="body1" fontSize={15}>
-    //       TID
-    //     </Typography>
-    //     <Typography variant="body1" fontSize={15}>
-    //       {item.TID}
-    //     </Typography>
-    //   </Box>
-    //   <Box component="div" px={2} my={1} borderRight="1px solid #ccc">
-    //     <Typography variant="body1" fontSize={15}>
-    //       15:20:20
-    //     </Typography>
-    //     <Typography variant="body1" fontSize={15}>
-    //       {item.date}
-    //     </Typography>
-    //   </Box>
-    //   <Box component="div" px={2} my={1} borderRight="1px solid #ccc">
-    // <Typography variant="body1" fontSize={15}>
-    //   Valor Bruto
-    // </Typography>
-    // <Typography variant="body1" fontSize={15}>
-    //   {item.value}
-    // </Typography>
-    //   </Box>
-    //   <Box component="div" px={2} my={1} borderRight="1px solid #ccc">
-    // <Typography variant="body1" fontSize={15}>
-    //   Taxa de Serviço
-    // </Typography>
-    // <Typography variant="body1" fontSize={15}>
-    //   {item.rate}
-    // </Typography>
-    //   </Box>
-    //   <Box component="div" px={2} my={1} borderRight="1px solid #ccc">
-    // <Typography variant="body1" fontSize={15}>
-    //   Valor Liquido
-    // </Typography>
-    // <Typography variant="body1" fontSize={15}>
-    //   R$ 1.670,00
-    // </Typography>
-    //   </Box>
-    // </Box>
   );
 }

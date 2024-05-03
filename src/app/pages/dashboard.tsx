@@ -3,7 +3,7 @@ import Balance from '../components/balance/balance';
 import ConversationRate from '../components/conversationRate/conversation-rate';
 import RequestRefund from '../components/requestRefund/request-refund';
 import Pendencies from '../components/pendencies/pendencies';
-import Operations from '../components/operations/operatins';
+import Operations from '../components/operations/operations';
 import { SalesValue } from '../components/salesValue/sales-value';
 import { SalesQuantity } from '../components/salesQuantity/sales-quantily';
 import { AverageTicket } from '../components/averageTicket/average-ticket';
