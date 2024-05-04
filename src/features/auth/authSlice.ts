@@ -1,25 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authProvider } from './provider/auth-provider';
 import { router } from '../../app/config/rounters';
-import { dashProvider } from './provider/dash-provider';
 
 export interface PayMeeState {
   accessToken?: string | null;
   errorMessage: string;
-  dashboard: Array<T>;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: PayMeeState = {
   accessToken: localStorage.getItem('token'),
   errorMessage: '',
-  dashboard:[],
   loading: 'idle',
 };
 
 export const selectorErrorMessage = (state) => state.auth.errorMessage;
 export const selectorAccesToken = (state) => state.auth.accessToken;
-export const selectorDashboard = (state) => state.auth.dashboard;
 
 
 export const fetchLogin = createAsyncThunk(
@@ -30,22 +26,11 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-export const fetchDash = createAsyncThunk(
-  'auth/dashboard',
-  async () => {
-    const response = await dashProvider();
-    return response.data;
-  }
-);
-
 export const payMeeSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchDash.fulfilled, (state, action) => {
-      state.dashboard = action.payload;
-    });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.accessToken = action.payload.accessToken;
       localStorage.setItem('token', action.payload.accessToken);

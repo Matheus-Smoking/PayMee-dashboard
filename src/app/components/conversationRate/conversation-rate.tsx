@@ -5,8 +5,32 @@ import {
   Select,
   Typography,
 } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { formatDate, getDate } from 'src/app/utils/formate-date';
+import {
+  fetchConversation,
+  selectorConversation,
+} from 'src/features/conversation/conversationSlice';
 
 const ConversationRate = () => {
+  const { yestarday, sevenDays, thirtyDays } = getDate();
+
+  const dateOptions = [
+    { label: 'Dia anterior', value: formatDate(yestarday) },
+    { label: '7 dias', value: formatDate(sevenDays) },
+    { label: '30 Dias', value: formatDate(thirtyDays) },
+  ];
+  const conversationRate = useSelector(selectorConversation);
+  const { value, pending, total } = conversationRate[0]
+    ? conversationRate[0]
+    : conversationRate;
+  const [optionDate, setOptionDate] = useState(dateOptions[0].value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchConversation({ date: optionDate }));
+  }, [dispatch, optionDate]);
+
   return (
     <Box border="1px solid #e2e2e2" maxWidth="100%" bgcolor="white">
       <Box
@@ -24,14 +48,18 @@ const ConversationRate = () => {
         <Select
           labelId="selected-days"
           id="selected-days"
-          value={10}
-          onChange={() => undefined}
+          value={optionDate}
+          onChange={(event) => setOptionDate(event.target.value)}
           label="Dias"
           variant="standard"
         >
-          <MenuItem value={10}>Dia anterior</MenuItem>
-          <MenuItem value={20}>7 dias</MenuItem>
-          <MenuItem value={30}>30 dias</MenuItem>
+          {dateOptions.map(({ label, value }) => {
+            return (
+              <MenuItem key={value} value={value}>
+                {label}
+              </MenuItem>
+            );
+          })}
         </Select>
       </Box>
       <Box display="flex" justifyContent="center" p={4}>
@@ -43,7 +71,7 @@ const ConversationRate = () => {
           <CircularProgress
             size={200}
             variant="determinate"
-            value={80}
+            value={value}
             sx={{ color: '#e77827' }}
           />
           <Box
@@ -74,7 +102,7 @@ const ConversationRate = () => {
                 fontSize={35}
                 color="primary"
                 fontWeight="bold"
-              >{`${Math.round(10)}% `}</Typography>
+              >{`${Math.round(value)}% `}</Typography>
               <Typography color="text.disabled">de conversão</Typography>
             </Typography>
           </Box>

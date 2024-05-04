@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { operationProvider } from './operator-provider';
+import { operationProvider } from './provider/operator-provider';
 
 type Operation = {
   refund: boolean;
@@ -39,7 +39,6 @@ export const operationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOperation.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.operations = action.payload;
     });
 
