@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { operationProvider } from './provider/operator-provider';
+import { operationProvider } from './operator-provider';
 
 type Operation = {
   refund: boolean;
@@ -38,11 +38,16 @@ export const operationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchOperation.pending, (state) => {
+      state.loading = 'pending';
+    });
     builder.addCase(fetchOperation.fulfilled, (state, action) => {
+      state.loading = 'idle';
       state.operations = action.payload;
     });
 
     builder.addCase(fetchOperation.rejected, (state, action) => {
+      state.loading = 'idle';
       const codeMapper: Record<string, string> = {
         ERR_BAD_REQUEST: 'Tivemos um problema. tente mais tarde!',
         UNKNOWN: 'Tivemos um problema. tente mais tarde!',
