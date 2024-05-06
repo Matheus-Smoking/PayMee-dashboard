@@ -1,0 +1,310 @@
+{
+  "users": [
+    {
+      "email": "admin@paymee.com",
+      "password": "$2a$10$SDYS7ky5IPHaw/P11HdzuutY0R7cRzF1s59rEJlt2nyl5J22P1t1a",
+      "firstname": "paymee",
+      "lastname": "getway",
+      "age": 30,
+      "id": 1
+    }
+  ],
+  "dashboard": [
+    {
+      "balance": {
+        "balanceAvailable": "15.739,31",
+        "totalBalance": "30.800,00",
+        "limit": "350,00"
+      },
+      "salesAmount": "2.623.492,97",
+      "salesQuantity": 368,
+      "averageTicket": "259,66"
+    }
+  ],
+  "operations": [
+    {
+      "refund": true,
+      "TID": "007246813",
+      "date": "2024-04-17",
+      "value": "1.725,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246814",
+      "date": "2024-04-15",
+      "value": "1.125,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": true,
+      "TID": "007246813",
+      "date": "2024-04-23",
+      "value": "1.225,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246814",
+      "date": "2024-04-08",
+      "value": "1.325,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": true,
+      "TID": "007276813",
+      "date": "2024-04-07",
+      "value": "1.305,00",
+      "rate": "55,00",
+      "liquid": "1.000,00"
+    },
+    {
+      "refund": false,
+      "TID": "007244814",
+      "date": "2024-04-12",
+      "value": "1.900,00",
+      "rate": "170,00",
+      "liquid": "1.070,00"
+    },
+    {
+      "refund": true,
+      "TID": "007246813",
+      "date": "2024-04-18",
+      "value": "1.325,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246813",
+      "date": "2024-04-07",
+      "value": "1.925,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246813",
+      "date": "2024-04-06",
+      "value": "1.625,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": true,
+      "TID": "007246813",
+      "date": "2024-05-05",
+      "value": "1.805,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246813",
+      "date": "2024-05-04",
+      "value": "1.725,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246813",
+      "date": "2024-04-23",
+      "value": "1.820,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+
+    {
+      "refund": true,
+      "TID": "007246816",
+      "date": "2024-04-04",
+      "value": "1.825,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246815",
+      "date": "2024-04-24",
+      "value": "1.300,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": false,
+      "TID": "007246814",
+      "date": "2024-04-19",
+      "value": "1.400,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": true,
+      "TID": "007246814",
+      "date": "2024-04-30",
+      "value": "1.500,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    },
+    {
+      "refund": true,
+      "TID": "007246814",
+      "date": "2024-04-29",
+      "value": "1.568,00",
+      "rate": "125,00",
+      "liquid": "1.670,00"
+    }
+  ],
+  "conversation": [
+    {
+      "date": "2024-05-05",
+      "value": 80,
+      "total": "1200",
+      "pending": "200"
+    },
+    {
+      "date": "2024-04-05",
+      "value": 10,
+      "total": "1200",
+      "pending": "100"
+    },
+    {
+      "date": "2024-05-04",
+      "value": 20,
+      "total": "1200",
+      "pending": "200"
+    },
+    {
+      "date": "2024-05-03",
+      "value": 30,
+      "total": "1200",
+      "pending": "250"
+    },
+    {
+      "date": "2024-05-02",
+      "value": 40,
+      "total": "1200",
+      "pending": "300"
+    },
+    {
+      "date": "2024-05-01",
+      "value": 50,
+      "total": "1500",
+      "pending": "350"
+    },
+    {
+      "date": "2024-04-04",
+      "value": 10,
+      "total": "800",
+      "pending": "150"
+    },
+    {
+      "date": "2024-04-05",
+      "value": 5,
+      "total": "900",
+      "pending": "150"
+    },
+    {
+      "date": "2024-04-06",
+      "value": 30,
+      "total": "3000",
+      "pending": "150"
+    },
+    {
+      "date": "2024-04-19",
+      "value": 70,
+      "total": "1000",
+      "pending": "150"
+    },
+    {
+      "date": "2024-04-19",
+      "value": 90,
+      "total": "5000",
+      "pending": "150"
+    },
+    {
+      "date": "2024-04-19",
+      "value": 65,
+      "total": "2000",
+      "pending": "150"
+    }
+  ],
+  "pendencies":[
+    {
+      "date": "2024-05-04",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-05-03",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-05-02",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-05-01",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+
+    {
+      "date": "2024-04-30",
+      "sales": 12,
+      "withdrawals": 3,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-04-29",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-04-28",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-04-04",
+      "sales": 13,
+      "withdrawals": 20,
+      "refunds": 40,
+      "payouts":47
+    },
+    {
+      "date": "2024-12-19",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    },
+    {
+      "date": "2024-12-19",
+      "sales": 12,
+      "withdrawals": 2,
+      "refunds": 35,
+      "payouts":47
+    }
+  ]
+}
