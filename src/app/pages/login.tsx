@@ -15,13 +15,15 @@ export default function Login() {
     >
       <Box component="div" mr={8} mt={12}>
         <Box
-          component="figure"
+          component="div"
           mb={8}
           display="flex"
           justifyContent="center"
           maxHeight="100%"
         >
-          <img src={logo} alt="logo paymee" />
+          <figure>
+            <img src={logo} alt="logo paymee" />
+          </figure>
         </Box>
         <FormLogin />
       </Box>
