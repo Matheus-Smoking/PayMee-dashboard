@@ -2,6 +2,7 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import { theme } from './themes';
 import { router } from './config/rounters';
+import './config/interceptor';
 
 export function App() {
   return (

@@ -1,7 +1,5 @@
-// high order fuction
-
 import { useSelector } from 'react-redux';
-import { selectorAccesToken } from 'src/features/auth/authSlice';
+import { selectorAccesToken } from 'src/features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
