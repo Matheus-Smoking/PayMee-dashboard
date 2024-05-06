@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { conversationProvider } from './provider/conversation-provider';
+import { conversationProvider } from './conversation-provider';
 
 type Conversation = {
   date: string;
@@ -36,11 +36,16 @@ export const conversationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchConversation.pending, (state) => {
+      state.loading = 'pending';
+    });
     builder.addCase(fetchConversation.fulfilled, (state, action) => {
+      state.loading = 'idle';
       state.conversations = action.payload;
     });
 
     builder.addCase(fetchConversation.rejected, (state, action) => {
+      state.loading = 'idle';
       const codeMapper: Record<string, string> = {
         ERR_BAD_REQUEST: 'Tivemos um problema. tente mais tarde!',
         UNKNOWN: 'Tivemos um problema. tente mais tarde!',
