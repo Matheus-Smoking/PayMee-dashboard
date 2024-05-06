@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { cellPhonePix, logo } from '../../assets';
-import { FormLogin } from '../components/formLogin/form-login';
+import { FormLogin } from '../components/form-login/form-login';
 
-const Login = () => {
+export default function Login() {
   return (
     <Box
       component="section"
@@ -14,7 +14,13 @@ const Login = () => {
       justifyContent="center"
     >
       <Box component="div" mr={8} mt={12}>
-        <Box component="div" mb={8} display="flex" justifyContent="center">
+        <Box
+          component="figure"
+          mb={8}
+          display="flex"
+          justifyContent="center"
+          maxHeight="100%"
+        >
           <img src={logo} alt="logo paymee" />
         </Box>
         <FormLogin />
@@ -22,6 +28,4 @@ const Login = () => {
       <img src={cellPhonePix} alt="Celular Pix" />
     </Box>
   );
-};
-
-export default Login;
+}

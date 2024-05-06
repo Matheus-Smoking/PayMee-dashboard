@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authProvider } from './provider/auth-provider';
+import { authProvider } from './auth-provider';
 import { router } from '../../app/config/rounters';
 
 export interface PayMeeState {
@@ -17,13 +17,12 @@ const initialState: PayMeeState = {
 export const selectorErrorMessage = (state) => state.auth.errorMessage;
 export const selectorAccesToken = (state) => state.auth.accessToken;
 
-
 export const fetchLogin = createAsyncThunk(
   'auth/login',
-  async (payload: { email: string; password: string }) => {
-    const response = await authProvider(payload.email, payload.password);
-    return response.data;
-  }
+  (payload: { email: string; password: string; token: string }) =>
+    authProvider(payload.email, payload.password, payload.token).then(
+      (res) => res.data
+    )
 );
 
 export const payMeeSlice = createSlice({
@@ -31,13 +30,19 @@ export const payMeeSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchLogin.pending, (state) => {
+      state.loading = 'pending';
+    });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
+      state.loading = 'idle';
       state.accessToken = action.payload.accessToken;
       localStorage.setItem('token', action.payload.accessToken);
+      window.scrollTo(0,0)
       router.navigate('/');
     });
 
     builder.addCase(fetchLogin.rejected, (state, action) => {
+      state.loading = 'idle';
       const codeMapper: Record<string, string> = {
         ERR_BAD_REQUEST: 'Usuário ou senha inválidos',
         UNKNOWN: 'Tivemos um problema. tente mais tarde!',
@@ -45,6 +50,5 @@ export const payMeeSlice = createSlice({
 
       state.errorMessage = codeMapper[action.error.code || 'UNKNOWN'];
     });
-
   },
 });
