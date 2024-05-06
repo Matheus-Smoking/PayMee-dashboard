@@ -1,6 +1,6 @@
 # PayMee
 
-<a alt="Paymee logo" href="https://www.paymee.com.br" target="_blank" rel="noreferrer"><img src="https://www.paymee.com.br/wp-content/uploads/2022/03/Negativo-1-1.png" width="160" height="70"></a>
+<a alt="Paymee logo" href="https://www.paymee.com.br" target="_blank" rel="noreferrer"><img src="https://www.paymee.com.br/wp-content/uploads/2022/03/Negativo-1-1.png" width="160"></a>
 
 # Dashboard Frontend Paymee
 
@@ -35,7 +35,7 @@ Este dashboard foi criado para fornecer uma interface de usuário intuitiva e at
 Após a instalação das dependências, você pode iniciar o servidor de desenvolvimento local executando o seguinte comando:
 `npm start`
 
-Isso iniciará o aplicativo em modo de desenvolvimento. Você poderá acessá-lo em [http://localhost:3000](http://localhost:3000) no seu navegador.
+Isso iniciará o aplicativo em modo de desenvolvimento. Você poderá acessá-lo em [http://localhost:3000](http://localhost:3000) ou [http://localhost:4200](http://localhost:4200) no seu navegador.
 
 ### Login
 
